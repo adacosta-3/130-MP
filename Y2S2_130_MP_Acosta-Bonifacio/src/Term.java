@@ -4,7 +4,7 @@ import java.util.*;
  * The Term class encapsulates the representation and manipulation of boolean function terms,
  * facilitating the simplification process in the Quine-McCluskey algorithm.
  *
- * @author Arianne Jayne AcostaChristian Jesse Bonifacio
+ * @author Arianne Jayne Acosta
  * @author Christian Jesse Bonifacio
  * @version 1.0
  * @since 2024-03-20
