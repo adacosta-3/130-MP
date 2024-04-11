@@ -2,6 +2,8 @@ package org.example.cs130mpfinal;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.TextAlignment;
 
@@ -14,8 +16,6 @@ public class QMCController
     private TextField mtInput, varsInput;
     @FXML
     private Label customInfo;
-    //    @FXML
-//    private Alert a = new Alert(AlertType.NONE);
     @FXML
     private TextArea solution;
     @FXML
@@ -28,15 +28,23 @@ public class QMCController
     @FXML
     public void initialize()
     {
+        ToggleGroup group = new ToggleGroup();
+        yes.setToggleGroup(group);
+        no.setToggleGroup(group);
+
+        no.setSelected(true);
+        customInfo.setVisible(false);
+        varsInput.setText("A, B, C, D, E, F, G, H, I, J");
+
         solve.setOnAction(event -> handleSolveButton());
         clear.setOnAction(event -> handleClearButton());
         yes.setOnAction (event -> {
-            mtInput.setEditable(true);
-            mtInput.clear();
+            varsInput.setEditable(true);
+            varsInput.clear();
         });
         no.setOnAction (event -> {
-            mtInput.setEditable(false);
-            mtInput.setText("A, B, C, D, E, F, G, H, I, J");
+            varsInput.setEditable(false);
+            varsInput.setText("A, B, C, D, E, F, G, H, I, J");
         });
 
 
@@ -47,12 +55,7 @@ public class QMCController
         minterms = mtInput.getText();
         QMCDriver = new QuineMcCluskeyCalculator(minterms);
         boolean mintermsAreValid = validMinterms(minterms);
-
-        if (!mintermsAreValid)
-        {
-            showAlert("Input exceeds maximum (1023): " + minterms, "Error");
-            mtInput.setText("");
-        }
+        customInfo.setVisible(true);
 
         String variables = varsInput.getText();
         QMCDriver.solve();
@@ -67,6 +70,8 @@ public class QMCController
     {
         mtInput.clear();
         varsInput.setText("A, B, C, D, E, F, G, H, I, J");
+        no.setSelected(true);
+        customInfo.setVisible(false);
         varsInput.setEditable(false);
         solution.clear();
 
@@ -82,17 +87,23 @@ public class QMCController
 
         for (int i = 0; i < temp.length; i++)
         {
+            if (temp[i].equals("")) {
+                showAlert("Your input must not contain consecutive commas.","Invalid Input");
+                return false;
+            }
+
             try
             {
                 intMinterms[i] = Integer.parseInt(temp[i]);
                 if (intMinterms[i] > 1023)
                 {
+                    showAlert("Inputted minterms must not exceed maximum number 1023\n Your input: " + s, "Invalid Input");
                     return false;
                 }
             }
             catch (NumberFormatException e)
             {
-                showAlert("Invalid Input: " + s, "Error");
+                showAlert("Your input must only contain integers and be comma or space delimited\ne.g. 1,2,3; 1 2 3; 1, 2, 3\nYour input: " + s, "Invalid Input");
                 mtInput.setText("");
                 return false;
             }

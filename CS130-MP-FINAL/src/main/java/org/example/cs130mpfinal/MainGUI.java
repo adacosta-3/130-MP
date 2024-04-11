@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 public class MainGUI extends Application {
     public static void main(String[] args) {
@@ -17,7 +18,7 @@ public class MainGUI extends Application {
     @Override
     public void start(Stage stage) throws Exception
     {
-        URL fxmlUrl = getClass().getResource("MainGUI");
+        URL fxmlUrl = getClass().getResource("/org/example/cs130mpfinal/MainGUI.fxml");
         System.out.println("URL" + fxmlUrl);
         if (fxmlUrl == null) {
             throw new IOException("FXML file not found");
@@ -26,9 +27,8 @@ public class MainGUI extends Application {
 
         Scene scene = new Scene(root);
         stage.setTitle("Quine-McCluskey Calculator");
-        Image appicon = new Image(getClass().getResourceAsStream("resources/placeholder.jpg"));
-        //Image appicon = new Image("/imageassets/app_icon.png");
-        stage.getIcons().add(appicon);
+//        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("placeholder.jpg")));
+//        stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
     }

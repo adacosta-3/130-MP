@@ -96,6 +96,7 @@ public class QuineMcCluskeyCalculator {
      * @return Integer array with minterms parsed from string input.
      */
     private int[] convertString(String s) {
+        s = s.replace(", ",",");
         s = s.replace(",", " ");
 
         if (s.trim().equals("")) {
@@ -110,15 +111,22 @@ public class QuineMcCluskeyCalculator {
                 int temp = Integer.parseInt(a[i]);
                 t[i] = temp;
             } catch (Exception e) {
-                if (s.matches("[\\d,\\s]+"))
-                    JOptionPane.showMessageDialog(null, "Invalid input. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                if (!s.matches("[\\d,\\s]+"))
+                {
+                    QMCController window = new QMCController();
+                    window.showAlert("Your input must only contain integers and be comma or space delimited\ne.g. 1,2,3; 1 2 3; 1, 2, 3\nYour input: " + s, "Invalid Input");
+                    return new int[] {};
+                }
+
             }
         }
 
         HashSet<Integer> dup = new HashSet<>();
         for (int i = 0; i < t.length; i++) {
             if (dup.contains(t[i])) {
-                JOptionPane.showMessageDialog(null, "Duplicates encountered. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                QMCController window = new QMCController();
+                window.showAlert("List of minterms must not have duplicates.","Invalid Input");
+                break;
             }
             dup.add(t[i]);
         }
