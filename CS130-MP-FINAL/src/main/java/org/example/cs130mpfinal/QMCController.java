@@ -2,24 +2,31 @@ package org.example.cs130mpfinal;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.text.TextAlignment;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class QMCController
 {
     private QuineMcCluskeyCalculator QMCDriver;
-    private String minterms, variables;
+    private String minterms;
 
     @FXML
     private TextField mtInput, varsInput;
+    @FXML
+    private Hyperlink help;
     @FXML
     private Label customInfo;
     @FXML
     private TextArea solution;
     @FXML
-    private Button solve, clear, exit;
+    private Button solve, clear;
     @FXML
     private RadioButton yes;
     @FXML
@@ -77,6 +84,12 @@ public class QMCController
 
     }
 
+
+    @FXML
+    private void handleHyperlink() throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://www.desmos.com/scientific"));
+    }
+
     public boolean validMinterms(String s)
     {
         s = s.replace(", ",",");
@@ -97,13 +110,13 @@ public class QMCController
                 intMinterms[i] = Integer.parseInt(temp[i]);
                 if (intMinterms[i] > 1023)
                 {
-                    showAlert("Inputted minterms must not exceed maximum number 1023\n Your input: " + s, "Invalid Input");
+                    showAlert("Inputted minterms must not exceed maximum number 1023\nYour input: " + s, "Invalid Input");
                     return false;
                 }
             }
             catch (NumberFormatException e)
             {
-                showAlert("Your input must only contain integers and be comma or space delimited\ne.g. 1,2,3; 1 2 3; 1, 2, 3\nYour input: " + s, "Invalid Input");
+                showAlert("Your input must only contain integers and be comma or space delimited\ne.g. 1,2,3; 1 2 3; 1, 2, 3\n\nYour input: " + s, "Invalid Input");
                 mtInput.setText("");
                 return false;
             }
@@ -133,7 +146,7 @@ public class QMCController
         int inputLength = inputVariables.length;
         if (inputLength < 10)
         {
-            customInfo.setText("Variables missing, using default for the rest*");
+            customInfo.setText("Missing variables padded with default");
         }
 
         for (int i = 0; i < Math.min(inputLength, 10); i++)
@@ -141,8 +154,7 @@ public class QMCController
             variables[i] = inputVariables[i].length() > 1 ? "(" + inputVariables[i] + ")" : inputVariables[i];
         }
         if (inputLength > 10) {
-//            customInfo.setForeground(new Color(204,0,51));
-            customInfo.setText("Input exceeds 10 variables, using only first 10*");
+            customInfo.setText("Using only first 10 inputted variables");
         }
         return variables;
     }

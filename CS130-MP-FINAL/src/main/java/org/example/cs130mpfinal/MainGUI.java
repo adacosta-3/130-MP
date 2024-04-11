@@ -27,9 +27,10 @@ public class MainGUI extends Application {
 
         Scene scene = new Scene(root);
         stage.setTitle("Quine-McCluskey Calculator");
-//        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("placeholder.jpg")));
-//        stage.getIcons().add(icon);
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("logo.png")));
+        stage.getIcons().add(icon);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 }
