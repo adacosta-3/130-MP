@@ -12,11 +12,22 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * The QMC Controller class is a JavaFX controller class for the Quine-McCluskey Calculator application.
+ * It manages the user interface components and handles user interactions.
+ * Contains methods and fields to initialize UI, handle button clicks and user input to perform the algorithm.
+ *
+ * @author Arianne Jayne Acosta
+ * @author Christian Jesse Bonifacio
+ * @version 2.0
+ * @since 2024-04-10
+ */
 public class QMCController
 {
     private QuineMcCluskeyCalculator QMCDriver;
     private String minterms;
 
+    // Components of stage
     @FXML
     private TextField mtInput, varsInput;
     @FXML
@@ -32,6 +43,11 @@ public class QMCController
     @FXML
     private RadioButton no;
 
+    /**
+     * Method to initialize GUI component.
+     *
+     * Sets default selections and text, and attaches event handlers to buttons.
+     */
     @FXML
     public void initialize()
     {
@@ -53,9 +69,14 @@ public class QMCController
             varsInput.setEditable(false);
             varsInput.setText("A, B, C, D, E, F, G, H, I, J");
         });
-
-
     }
+
+    /**
+     * Method which handles "solve" button click event.
+     *
+     * Retrieves user input for minterms and variables.
+     * Creates a QuineMcCluskeyCalculator object, simplifies function and displays solution if it is valid.
+     */
     @FXML
     private void handleSolveButton()
     {
@@ -72,6 +93,11 @@ public class QMCController
         }
     }
 
+    /**
+     * Method which handles action triggered by clicking the "clear" button in the GUI.
+     *
+     * Clears text input fields for minterms, sets default text for variables, resets radio button selection to default.
+     */
     @FXML
     private void handleClearButton()
     {
@@ -85,11 +111,25 @@ public class QMCController
     }
 
 
+    /**
+     * Method which handles event wherein Help hyperlink is clicked.
+     *
+     * User is redirected to their browser and is navigated to the user manual.
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     @FXML
     private void handleHyperlink() throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://www.desmos.com/scientific"));
     }
 
+    /**
+     * Helper method which validates the input string containing minterms.
+     *
+     * Checks for formatting errors (such as consecutive commas) and displays an alert message indicating issue encountered.
+     * @param s user inputted string of minterms
+     * @return true if input is valid
+     */
     public boolean validMinterms(String s)
     {
         s = s.replace(", ",",");
@@ -125,6 +165,11 @@ public class QMCController
         return true;
     }
 
+    /**
+     * Method which creates and displays an error message window given the passed message and title.
+     * @param msg body of the error
+     * @param title type of error
+     */
     public void showAlert(String msg, String title)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -134,6 +179,15 @@ public class QMCController
         alert.showAndWait();
     }
 
+    /**
+     * Method which processes a string input of custom variables, returning an array of variables
+     *
+     * Starts with default variables "A" to "J".
+     * If the input is empty, it returns defaults; otherwise, it splits and trims the input.
+     * Updates a text field for user notification.
+     * @param s user inputted string of custom or default variables
+     * @return variables validated list of 10 variables to use for the calculator
+     */
     public String[] customVars(String s)
     {
         String[] variables = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
