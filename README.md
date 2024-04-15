@@ -7,5 +7,4 @@ Simplifies Boolean functions up to 10 variables by the employing Quine-McCluskey
 Created using Java.
 
 Developed by: 
-Arianne Jayne D. Acosta 
-Christian Jesse Q. Bonifacio
+Arianne Jayne D. Acosta & Christian Jesse Q. Bonifacio
