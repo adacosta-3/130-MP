@@ -1,5 +1,6 @@
 package org.example.cs130mpfinal;
 
+import javafx.animation.Interpolator;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -11,6 +12,9 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import javafx.animation.ScaleTransition;
+import javafx.util.Duration;
+
 
 /**
  * The QMC Controller class is a JavaFX controller class for the Quine-McCluskey Calculator application.
@@ -74,12 +78,28 @@ public class QMCController
     /**
      * Method which handles "solve" button click event.
      *
+     * Animates solve button.
      * Retrieves user input for minterms and variables.
      * Creates a QuineMcCluskeyCalculator object, simplifies function and displays solution if it is valid.
      */
     @FXML
     private void handleSolveButton()
     {
+        ScaleTransition st = new ScaleTransition(Duration.millis(200), solve);
+        st.setByX(0.1);
+        st.setByY(0.1);
+        st.setCycleCount(2);
+        st.setAutoReverse(true);
+        st.setInterpolator(Interpolator.EASE_BOTH);
+
+        st.playFromStart();
+
+        st.setOnFinished(event -> {
+            solve.setScaleX(1.0);
+            solve.setScaleY(1.0);
+        });
+
+
         minterms = mtInput.getText();
         QMCDriver = new QuineMcCluskeyCalculator(minterms);
         boolean mintermsAreValid = validMinterms(minterms);
@@ -89,6 +109,10 @@ public class QMCController
         QMCDriver.solve();
         if (mintermsAreValid && minterms.matches("[\\d,\\s]+"))
         {
+            if (!variables.equals("A, B, C, D, E, F, G, H, I, J"))
+            {
+                customInfo.setText("                       Custom variables used");
+            }
             solution.setText(QMCDriver.printResults(customVars(variables)));
         }
     }
@@ -120,7 +144,7 @@ public class QMCController
      */
     @FXML
     private void handleHyperlink() throws URISyntaxException, IOException {
-        Desktop.getDesktop().browse(new URI("https://www.desmos.com/scientific"));
+        Desktop.getDesktop().browse(new URI("https://tinyurl.com/cs130usermanual"));
     }
 
     /**
@@ -141,7 +165,7 @@ public class QMCController
         for (int i = 0; i < temp.length; i++)
         {
             if (temp[i].equals("")) {
-                showAlert("Your input must not contain consecutive commas.","Invalid Input");
+                showAlert("Input must not contain consecutive commas.","Invalid Input");
                 return false;
             }
 
@@ -156,7 +180,7 @@ public class QMCController
             }
             catch (NumberFormatException e)
             {
-                showAlert("Your input must only contain integers and be comma or space delimited\ne.g. 1,2,3; 1 2 3; 1, 2, 3\n\nYour input: " + s, "Invalid Input");
+                showAlert("Input must only contain integers & be comma or space delimited\ne.g. 1,2,3; 1 2 3; 1, 2, 3\n\nYour input: " + s, "Invalid Input");
                 mtInput.setText("");
                 return false;
             }
@@ -208,10 +232,12 @@ public class QMCController
             variables[i] = inputVariables[i].length() > 1 ? "(" + inputVariables[i] + ")" : inputVariables[i];
         }
         if (inputLength > 10) {
-            customInfo.setText("Using only first 10 inputted variables");
+            customInfo.setText("  Using only first 10 inputted variables");
         }
         return variables;
     }
+
+
 }
 
 

@@ -1,0 +1,53 @@
+@font-face {
+	font-family: "Eloquia Display ExtBd";
+	src: url("org/example/cs130mpfinal/Fonts/Eloquia/EloquiaDisplay-ExtraBold.otf");
+}
+
+@font-face {
+	font-family: "Eloquia Text ExtLt";
+	src: url("org/example/cs130mpfinal/Fonts/Eloquia/EloquiaText-ExtraLight.otf");
+}
+
+#title {
+	-fx-font-family: 'Eloquia Display ExtBd';
+	-fx-font-size: 37px;
+}
+
+#sol
+{
+	-fx-font-family: 'Eloquia Display ExtBd';
+	-fx-font-size: 24px;
+}
+
+.label
+{
+	-fx-font-family: "Eloquia Text ExtLt";
+	-fx-font-size: 16px;
+}
+
+.text-field
+{
+	-fx-font-family: "Eloquia Text ExtLt";
+}
+
+.radio-button
+{
+	-fx-font-family: "Eloquia Text ExtLt";
+	-fx-font-size: 16px;
+}
+
+.button
+{
+	-fx-font-family: 'Eloquia Display ExtBd';
+	-fx-font-size: 18px;
+}
+
+.hyperlink
+{
+	-fx-font-family: "Eloquia Text ExtLt";
+	-fx-font-size: 16px;
+}
+
+
+
+

@@ -2,6 +2,17 @@
 	-fx-darkest-grey-color: #323232;
 }
 
+/*@font-face {*/
+/*	font-family: "Eloquia Text ExtLt";*/
+/*	src: url("org/example/cs130mpfinal/Fonts/Eloquia/EloquiaText-ExtraLight.otf");*/
+/*}*/
+
+/*.radio-button*/
+/*{*/
+/*	-fx-font-family: "Eloquia Text ExtLt";*/
+/*	-fx-font-size: 16px;*/
+/*}*/
+
 .radio-button .radio {
 	-fx-border-width: 1px;
 	-fx-border-color: #b0abb9;
@@ -10,23 +21,34 @@
 	-fx-border-radius: 15px;
 	-fx-padding: 3px;
 }
+
 .radio-button .radio:selected {
 	-fx-background-color: white;
 	-fx-background-image: null;
 }
-.radio-button -radio:armed {
+
+.radio-button:armed .radio {
 	-fx-background-color: white;
 	-fx-background-image: null;
 }
-.radio-button -radio:determinate {
+
+.radio-button:determinate .radio {
 	-fx-background-color: white;
 	-fx-background-image: null;
 }
-.radio-button -radio:indeterminate {
+
+.radio-button:indeterminate .radio {
 	-fx-background-color: white;
 	-fx-background-image: null;
 }
+
 .radio-button .dot {
 	-fx-background-radius: 15px;
 	-fx-padding: 8px;
 }
+
+
+
+
+
+

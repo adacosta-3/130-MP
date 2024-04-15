@@ -56,6 +56,7 @@ public class MainGUI extends Application {
         stage.setTitle("Quine-McCluskey Calculator");
         stage.getIcons().add(icon);
         stage.setScene(scene);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("font.css")).toExternalForm());
         stage.setResizable(false);
         stage.show();
     }

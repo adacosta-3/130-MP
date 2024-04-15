@@ -114,7 +114,7 @@ public class QuineMcCluskeyCalculator {
                 if (!s.matches("[\\d,\\s]+"))
                 {
                     QMCController window = new QMCController();
-                    window.showAlert("Your input must only contain integers and be comma or space delimited\ne.g. 1,2,3; 1 2 3; 1, 2, 3\nYour input: " + s, "Invalid Input");
+                    window.showAlert("Input must only contain integers & be comma or space delimited\ne.g. 1,2,3; 1 2 3; 1, 2, 3\nYour input: " + s, "Invalid Input");
                     return new int[] {};
                 }
 
