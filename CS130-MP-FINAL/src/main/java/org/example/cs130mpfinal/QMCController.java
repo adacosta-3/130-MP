@@ -104,6 +104,7 @@ public class QMCController
         QMCDriver = new QuineMcCluskeyCalculator(minterms);
         boolean mintermsAreValid = validMinterms(minterms);
         customInfo.setVisible(true);
+        customInfo.setText("                          Default variables used");
 
         String variables = varsInput.getText();
         QMCDriver.solve();
@@ -111,7 +112,7 @@ public class QMCController
         {
             if (!variables.equals("A, B, C, D, E, F, G, H, I, J"))
             {
-                customInfo.setText("                       Custom variables used");
+                customInfo.setText("                        Custom variables used");
             }
             solution.setText(QMCDriver.printResults(customVars(variables)));
         }
