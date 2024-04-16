@@ -2,7 +2,7 @@
 Machine Problem #1
 Quine-McCluskey Calculator**
 
-Simplifies Boolean functions up to 10 variables by the employing Quine-McCluskey algorithm (also known as the Tabulation Method). 
+Simplifies Boolean functions with up to 10 variables by the employing Quine-McCluskey algorithm (also known as the Tabulation Method). 
 
 Created using Java.
 
